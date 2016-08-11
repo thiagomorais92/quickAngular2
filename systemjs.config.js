@@ -1,5 +1,3 @@
-// systemjs.config.js, the SystemJS configuration file
-
 /**
  * System configuration for Angular 2 samples
  * Adjust as necessary for your application needs.
@@ -48,3 +46,4 @@
   };
   System.config(config);
 })(this);
+

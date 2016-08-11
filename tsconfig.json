@@ -1,5 +1,3 @@
-//tsconfig.json is the TypeScript compiler configuration file. See TypeScript Configuration for details.
-
 {
   "compilerOptions": {
     "target": "es5",
@@ -12,3 +10,4 @@
     "noImplicitAny": false
   }
 }
+
