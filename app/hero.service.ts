@@ -16,3 +16,4 @@ export class HeroService  {
     setTimeout(() => resolve(HEROES), 4000) // 4 seconds
   );
 }
+}
