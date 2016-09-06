@@ -1,4 +1,4 @@
-import {Component,OnInit,OnDestroy} from '@angular/core';
+import {Component,OnInit,OnDestroy,Input} from '@angular/core';
 import {Hero} from './model/Hero';
 import {HeroService} from './hero.service';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -7,8 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
 	selector:'my-hero-detail',
 	template:`
-		  <p>Hero Blow Route</p>
-
+		  
       <div *ngIf="hero">
     <h2>{{hero.name}} details!</h2>
     <div><label>id: </label>{{hero.id}}</div>
@@ -28,6 +27,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class HeroDetailComponent{
 	
   private sub: Subscription;
+  @Input()
   private hero: Hero;
 
   constructor( private route: ActivatedRoute,
@@ -38,7 +38,7 @@ export class HeroDetailComponent{
   OnInit(){
     this.sub = this.route.params.subscribe(params =>  {
       let id = +this.route.snapshot.params['id'];
-      this.hero = this.service.getHero(id);
+      this.hero = new Hero(12,'urixin');
     });
   }
 
