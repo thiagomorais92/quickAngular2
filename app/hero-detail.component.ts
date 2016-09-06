@@ -21,8 +21,9 @@ import { Subscription } from 'rxjs/Subscription';
   <p>
       <button (click)="gotoHeroes()">Back</button>
   </p>
-	`,providers:[HeroService]
-}),
+	`,
+  providers:[HeroService]
+})
 
 export class HeroDetailComponent{
 	
