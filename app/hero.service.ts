@@ -19,6 +19,12 @@ export class HeroService  {
 	}
 
 	  getHero(id: number | string) {
-	return new Hero(1,'huadhausdh');
+	  	let hero:Hero;
+	for (var i = 0; HEROES.length; ++i) {
+		if(HEROES[i].id == id){
+			hero = HEROES[i];
+		}
+	}
+	return Promise.resolve(hero);
   }
 }

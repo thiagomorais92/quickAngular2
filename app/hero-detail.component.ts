@@ -1,4 +1,4 @@
-import {Component,OnInit,OnDestroy,Input} from '@angular/core';
+import {Component,OnDestroy,Input,OnInit} from '@angular/core';
 import {Hero} from './model/Hero';
 import {HeroService} from './hero.service';
 import {Router, ActivatedRoute} from '@angular/router';
@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs/Subscription';
   providers:[HeroService]
 })
 
-export class HeroDetailComponent{
+export class HeroDetailComponent implements OnInit{
 	
   private sub: Subscription;
   @Input()
@@ -35,10 +35,10 @@ export class HeroDetailComponent{
   private service: HeroService){
   }
 
-  OnInit(){
+  ngOnInit(){
     this.sub = this.route.params.subscribe(params =>  {
       let id = +this.route.snapshot.params['id'];
-      this.hero = new Hero(12,'urixin');
+      this.hero = this.service.getHero(id);
     });
   }
 
