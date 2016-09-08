@@ -8,6 +8,7 @@ import {Hero} from './model/Hero';
 @Injectable()
 export class HeroService  {
 	
+	private hero:Hero;
 
 	getHeroes(){
 		return  Promise.resolve(HEROES);
@@ -18,13 +19,14 @@ export class HeroService  {
     	setTimeout(() => resolve(HEROES), 4000)); // 4 seconds 
 	}
 
-	  getHero(id: number | string) {
+	getHero(heroId: number | string) {
 	  	let hero:Hero;
-	for (var i = 0; HEROES.length; ++i) {
-		if(HEROES[i].id == id){
-			hero = HEROES[i];
+		for (var i = 0; i< HEROES.length; ++i) {
+			if(HEROES[i].id == heroId){
+				this.hero = HEROES[i];
+			}
 		}
+		
+		return Promise.resolve(this.hero);
 	}
-	return Promise.resolve(hero);
-  }
 }

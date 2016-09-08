@@ -27,21 +27,23 @@ import { Subscription } from 'rxjs/Subscription';
 export class HeroDetailComponent implements OnInit{
 	
   private sub: Subscription;
-  @Input()
-  private hero: Hero;
-
-  constructor( private route: ActivatedRoute,
+  private hero:Hero;
+  
+  constructor(private route: ActivatedRoute,
   private router: Router,
   private service: HeroService){
+
+
   }
 
   ngOnInit(){
     this.sub = this.route.params.subscribe(params =>  {
       let id = +this.route.snapshot.params['id'];
-      this.hero = this.service.getHero(id);
+      this.service.getHero(id).then(hero => {this.hero = hero});
     });
   }
 
+ 
   gotoHeroes(){
     this.router.navigate(['/heroes']);
   }

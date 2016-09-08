@@ -7,6 +7,7 @@ import {AppComponent}from './app.component';
 
 
 const appRoutes: Routes = [
+  { path: '', component: AppComponent},
   { path: 'hero/:id', component: HeroDetailComponent},
   { path: 'heroes', component:HeroListComponent }
 ];
