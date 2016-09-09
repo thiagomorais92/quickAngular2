@@ -9,20 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Hero_1 = require('./model/Hero');
+var hero_service_1 = require('./hero.service');
+var router_1 = require('@angular/router');
 var HeroDetailComponent = (function () {
-    function HeroDetailComponent() {
+    function HeroDetailComponent(route, router, service) {
+        this.route = route;
+        this.router = router;
+        this.service = service;
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Hero_1.Hero)
-    ], HeroDetailComponent.prototype, "hero", void 0);
+    HeroDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            var id = +_this.route.snapshot.params['id'];
+            _this.service.getHero(id).then(function (hero) { _this.hero = hero; });
+        });
+    };
+    HeroDetailComponent.prototype.gotoHeroes = function () {
+        //this.router.navigate(['/heroes']);
+        window.history.back();
+    };
+    HeroDetailComponent.prototype.OnDestroy = function () {
+        this.sub.unsubscribe();
+    };
     HeroDetailComponent = __decorate([
         core_1.Component({
             selector: 'my-hero-detail',
-            template: "\n\t\t<div *ngIf=\"hero\">\n    <h2>{{hero.name}} details!</h2>\n    <div><label>id: </label>{{hero.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"hero.name\" placeholder=\"name\"/>\n    </div>\n  </div>\n\t"
+            template: "\n\t\t  \n      <div *ngIf=\"hero\">\n    <h2>{{hero.name}} details!</h2>\n    <div><label>id: </label>{{hero.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"hero.name\" placeholder=\"name\"/>\n    </div>\n  </div>  \n\n  <p>\n      <button (click)=\"gotoHeroes()\">Back</button>\n  </p>\n\t",
+            providers: [hero_service_1.HeroService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, hero_service_1.HeroService])
     ], HeroDetailComponent);
     return HeroDetailComponent;
 }());

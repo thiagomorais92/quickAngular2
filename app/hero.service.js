@@ -14,7 +14,21 @@ var HeroService = (function () {
     function HeroService() {
     }
     HeroService.prototype.getHeroes = function () {
-        return mock_heroes_1.HEROES;
+        return Promise.resolve(mock_heroes_1.HEROES);
+    };
+    HeroService.prototype.getHeroesSlowly = function () {
+        return new Promise(function (resolve) {
+            return setTimeout(function () { return resolve(mock_heroes_1.HEROES); }, 4000);
+        }); // 4 seconds 
+    };
+    HeroService.prototype.getHero = function (heroId) {
+        var hero;
+        for (var i = 0; i < mock_heroes_1.HEROES.length; ++i) {
+            if (mock_heroes_1.HEROES[i].id == heroId) {
+                this.hero = mock_heroes_1.HEROES[i];
+            }
+        }
+        return Promise.resolve(this.hero);
     };
     HeroService = __decorate([
         core_1.Injectable(), 

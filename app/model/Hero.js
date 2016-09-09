@@ -4,6 +4,9 @@ var Hero = (function () {
         this.id = id;
         this.name = title;
     }
+    Hero.prototype.empty_constructor = function () { };
+    ;
+    ;
     return Hero;
 }());
 exports.Hero = Hero;

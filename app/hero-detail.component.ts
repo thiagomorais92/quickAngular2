@@ -45,7 +45,8 @@ export class HeroDetailComponent implements OnInit{
 
  
   gotoHeroes(){
-    this.router.navigate(['/heroes']);
+    //this.router.navigate(['/heroes']);
+    window.history.back();
   }
   OnDestroy(){
     this.sub.unsubscribe();
