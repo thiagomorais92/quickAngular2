@@ -7,20 +7,21 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
 	selector:'my-hero-detail',
 	template:`
-		  
-      <div *ngIf="hero">
-    <h2>{{hero.name}} details!</h2>
-    <div><label>id: </label>{{hero.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="hero.name" placeholder="name"/>
-    </div>
+  
+  <div *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+  <div><label>id: </label>{{hero.id}}</div>
+  <div>
+  <label>name: </label>
+  <input [(ngModel)]="hero.name" placeholder="name"/>
+  </div>
   </div>  
 
   <p>
-      <button (click)="gotoHeroes()">Back</button>
+  <button (click)="save()">Save</button><br/>
+  <button (click)="gotoHeroes()">Back</button>
   </p>
-	`,
+  `,
   providers:[HeroService]
 })
 
@@ -30,8 +31,8 @@ export class HeroDetailComponent implements OnInit{
   private hero:Hero;
   
   constructor(private route: ActivatedRoute,
-  private router: Router,
-  private service: HeroService){
+    private router: Router,
+    private service: HeroService){
 
 
   }
@@ -43,7 +44,11 @@ export class HeroDetailComponent implements OnInit{
     });
   }
 
- 
+  save(): void {
+    this.service.update(this.hero)
+    .then(this.gotoHeroes);
+  }
+
   gotoHeroes(){
     //this.router.navigate(['/heroes']);
     window.history.back();

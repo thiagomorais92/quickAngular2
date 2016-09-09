@@ -11,6 +11,11 @@ import {Router} from '@angular/router';
 		  <h2>My Heroes</h2>
 
 
+<label>Hero name:</label> <input #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">
+    Add
+  </button>
+
 <ul class="heroes">
   <li *ngFor="let hero of heroes"
   [class.selected]="hero === selectedHero"
@@ -97,4 +102,14 @@ export class HeroListComponent implements OnInit{
     //this.heroService.getHeroes().then(heroes => this.heroes = heroes);
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
+  
+  add(name: string): void {
+  name = name.trim();
+  if (!name) { return; }
+  this.heroService.create(name)
+    .then(hero => {
+      this.heroes.push(hero);
+      this.selectedHero = null;
+    });
+}
 }
